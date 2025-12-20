@@ -27,8 +27,7 @@ async function build() {
     bundle: true,
     format: 'esm',
     outfile: 'dist/app.js',
-    loader: { '.png': 'file' },
-    assetNames: 'assets/[name]',
+    loader: { '.png': 'dataurl' },
     publicPath: '/',
     minify: process.env.NODE_ENV === 'production'
   });

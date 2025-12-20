@@ -1,16 +1,13 @@
-/**
- * 主应用程序 - UI 交互逻辑
- */
-
 import { WatermarkEngine } from './core/watermarkEngine.js';
 import i18n from './i18n.js';
+import JSZip from 'jszip';
 
-// 全局状态
+// global state
 let engine = null;
 let imageQueue = [];
 let processedCount = 0;
 
-// DOM 元素
+// dom elements references
 const uploadArea = document.getElementById('uploadArea');
 const fileInput = document.getElementById('fileInput');
 const singlePreview = document.getElementById('singlePreview');
@@ -29,7 +26,7 @@ const resetBtn = document.getElementById('resetBtn');
 const statusMessage = document.getElementById('statusMessage');
 
 /**
- * 初始化应用
+ * initialize the application
  */
 async function init() {
     try {
@@ -48,7 +45,7 @@ async function init() {
 }
 
 /**
- * 设置语言切换
+ * setup language switch
  */
 function setupLanguageSwitch() {
     const btn = document.getElementById('langSwitch');
@@ -62,7 +59,7 @@ function setupLanguageSwitch() {
 }
 
 /**
- * 设置事件监听器
+ * setup event listeners
  */
 function setupEventListeners() {
     uploadArea.addEventListener('click', () => fileInput.click());
@@ -143,7 +140,7 @@ async function processSingle(item) {
         originalCanvas.height = img.height;
         originalCanvas.getContext('2d').drawImage(img, 0, 0);
 
-        // 显示图片信息
+        // update original image info
         const watermarkInfo = engine.getWatermarkInfo(img.width, img.height);
         originalInfo.innerHTML = `
             <strong>${i18n.t('info.size')}：</strong>${img.width} × ${img.height} px<br>
