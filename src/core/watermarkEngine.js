@@ -5,9 +5,8 @@
 
 import { calculateAlphaMap } from './alphaMap.js';
 import { removeWatermark } from './blendModes.js';
-
-const BG_48_PATH = '../assets/bg_48.png';
-const BG_96_PATH = '../assets/bg_96.png';
+import BG_48_PATH from '../assets/bg_48.png';
+import BG_96_PATH from '../assets/bg_96.png';
 
 /**
  * 根据图像尺寸检测水印配置

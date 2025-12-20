@@ -1,6 +1,7 @@
 {
   "title": "Gemini Watermark Remover - Lossless Watermark Removal Tool",
   "header.title": "Gemini Watermark Remover",
+  "nav.userscript": "Userscript for Gemini",
   "nav.principle": "How It Works?",
   "main.title": "Gemini AI Watermark Removal",
   "main.subtitle": "Based on reverse alpha blending algorithm, pure browser-side processing, Free, Fast, and Lossless",
