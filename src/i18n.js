@@ -9,14 +9,18 @@ const i18n = {
   },
 
   async loadTranslations(locale) {
-    const res = await fetch(`/i18n/${locale}.json?_=${Date.now()}`);
+    const res = await fetch(`./i18n/${locale}.json?_=${Date.now()}`);
     this.translations = await res.json();
     this.locale = locale;
     localStorage.setItem('locale', locale);
   },
 
   t(key) {
-    return this.translations[key] || key;
+    let text = this.translations[key] || key;
+    if (typeof text === 'string') {
+      text = text.replace('{{year}}', new Date().getFullYear());
+    }
+    return text;
   },
 
   applyTranslations() {
