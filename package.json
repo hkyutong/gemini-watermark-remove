@@ -1,11 +1,11 @@
 {
-  "name": "gemini-watermark-remover",
-  "description": "Automatically removes watermarks from Gemini AI generated images",
+  "name": "yutoai-watermark-remover",
+  "description": "YutoAI watermark removal tool for Gemini AI generated images",
   "version": "1.0.0",
-  "author": "journey-ad",
+  "author": "YutoAI",
   "repository": {
     "type": "git",
-    "url": "https://github.com/journey-ad/gemini-watermark-remover.git"
+    "url": "https://github.com/hkyutong/gemini-watermark-remove.git"
   },
   "license": "MIT",
   "type": "module",

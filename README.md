@@ -1,221 +1,123 @@
-[中文文档](README_zh.md)
-
-# Gemini Lossless Watermark Remover - [banana.ovo.re](https://banana.ovo.re)
-
-A high-performance, 100% client-side tool for removing Gemini AI watermarks. Built with pure JavaScript, it leverages a mathematically precise **Reverse Alpha Blending** algorithm rather than unpredictable AI inpainting.
+# YutoAI 无损去水印工具
 
 <p align="center">
-  <img src="https://count.getloli.com/@gemini-watermark-remover?name=gemini-watermark-remover&theme=minecraft&padding=7&offset=0&align=top&scale=1&pixelated=1&darkmode=auto" width="400">
+  <img src="./logo.png" width="120" alt="YutoAI Logo">
 </p>
 
-## Features
+中文为主，English summary 在文末。
 
-- ✅ **100% Client-side** - No backend, no server-side processing. Your data stays in your browser.
-- ✅ **Privacy-First** - Images are never uploaded to any server. Period.
-- ✅ **Mathematical Precision** - Based on the Reverse Alpha Blending formula, not "hallucinating" AI models.
-- ✅ **Auto-Detection** - Intelligent recognition of 48×48 or 96×96 watermark variants.
-- ✅ **User Friendly** - Simple drag-and-drop interface with instant processing.
-- ✅ **Cross-Platform** - Runs smoothly on all modern web browsers.
+## 项目简介
 
-## Examples
+`Gemini Watermark Remover` 是一个纯浏览器端的图像去水印工具，主要用于处理 Gemini 图像中的可见水印。
 
-<details open>
-<summary>Click to Expand/Collapse Examples</summary>
-　
-<p>lossless diff example</p>
-<p><img src="docs/lossless_diff.webp"></p>
+- 本地处理：图片不会上传到服务器
+- 无后端依赖：静态部署即可运行
+- 数学反解：基于 Reverse Alpha Blending
 
+## 功能特性
 
-<p>example images</p>
+- 自动识别 48×48 / 96×96 水印尺寸
+- 支持 JPG / PNG / WebP
+- 支持批量处理与打包下载
+- 支持用户脚本（Gemini 页面）
 
-| Original Image | Watermark Removed |
-| :---: | :----: |
-| <img src="docs/1.webp" width="400"> | <img src="docs/unwatermarked_1.webp" width="400"> |
-| <img src="docs/2.webp" width="400"> | <img src="docs/unwatermarked_2.webp" width="400"> |
-| <img src="docs/3.webp" width="400"> | <img src="docs/unwatermarked_3.webp" width="400"> |
-| <img src="docs/4.webp" width="400"> | <img src="docs/unwatermarked_4.webp" width="400"> |
-| <img src="docs/5.webp" width="400"> | <img src="docs/unwatermarked_5.webp" width="400"> |
+## 本地运行与启动
 
-</details>
-
-## ⚠️ Disclaimer
-
-> [!WARNING]
->  **USE AT YOUR OWN RISK**
->
-> This tool modifies image files. While it is designed to work reliably, unexpected results may occur due to:
-> - Variations in Gemini's watermark implementation
-> - Corrupted or unusual image formats
-> - Edge cases not covered by testing
->
-> The author assumes no responsibility for any data loss, image corruption, or unintended modifications. By using this tool, you acknowledge that you understand these risks.
-
-> [!NOTE]
-> **Note**: Disabling any fingerprint defender extensions (e.g., Canvas Fingerprint Defender) to avoid processing errors. https://github.com/journey-ad/gemini-watermark-remover/issues/3
-
-## Usage
-
-### Online Website
-
-1. Open [banana.ovo.re](https://banana.ovo.re).
-2. Drag and drop or click to select your Gemini-generated image.
-3. The engine will automatically process and remove the watermark.
-4. Download the cleaned image.
-
-### Userscript for Gemini Conversation Pages
-
-1. Install a userscript manager (e.g., Tampermonkey or Greasemonkey).
-2. Open [gemini-watermark-remover.user.js](https://banana.ovo.re/userscript/gemini-watermark-remover.user.js).
-3. The script will install automatically.
-4. Navigate to Gemini conversation pages.
-5. Click "Copy Image" or "Download Image" to remove the watermark.
-
-## Development
+### 1) 安装依赖
 
 ```bash
-# Install dependencies
 pnpm install
+```
 
-# Development build
+### 2) 开发模式（监听构建）
+
+```bash
 pnpm dev
+```
 
-# Production build
-pnpm build
+这会持续监听源码并输出到 `dist/`。
 
-# Local preview
+### 3) 启动本地预览
+
+```bash
 pnpm serve
 ```
 
-## How it Works
+启动后访问终端输出中的本地地址（通常是 `http://localhost:3000`）。
 
-### The Gemini Watermarking Process
+### 4) 生产构建
 
-Gemini applies watermarks using standard alpha compositing:
+```bash
+pnpm build
+```
 
-$$watermarked = \alpha \cdot logo + (1 - \alpha) \cdot original$$
+### 5) 用户脚本产物
 
-Where:
-- `watermarked`: The pixel value with the watermark.
-- `α`: The Alpha channel value (0.0 - 1.0).
-- `logo`: The watermark logo color value (White = 255).
-- `original`: The raw, original pixel value we want to recover.
+构建后脚本路径：`dist/userscript/yutoai-watermark-remover.user.js`
 
-### The Reverse Solution
-
-To remove the watermark, we solve for `original`:
-
-$$original = \frac{watermarked - \alpha \cdot logo}{1 - \alpha}$$
-
-By capturing the watermark on a known solid background, we reconstruct the exact Alpha map and apply the inverse formula to restore the original pixels with zero loss.
-
-## Detection Rules
-
-| Image Dimension Condition | Watermark Size | Right Margin | Bottom Margin |
-| :--- | :--- | :--- | :--- |
-| Width > 1024 **AND** Height > 1024 | 96×96 | 64px | 64px |
-| Otherwise | 48×48 | 32px | 32px |
-
-## Project Structure
+## 项目结构
 
 ```text
-gemini-watermark-remover/
-├── public/
-│   ├── index.html         # Main page
-│   └── terms.html         # Terms of Service page
-├── src/
-│   ├── core/
-│   │   ├── alphaMap.js    # Alpha map calculation logic
-│   │   ├── blendModes.js  # Implementation of Reverse Alpha Blending
-│   │   └── watermarkEngine.js  # Main engine coordinator
-│   ├── assets/
-│   │   ├── bg_48.png      # Pre-captured 48×48 watermark map
-│   │   └── bg_96.png      # Pre-captured 96×96 watermark map
-│   ├── i18n/              # Internationalization language files
-│   ├── userscript/        # Userscript for Gemini
-│   ├── app.js             # Website application entry point
-│   └── i18n.js            # Internationalization utilities
-├── dist/                  # Build output directory
-├── build.js               # Build script
+yutoai-watermark-remover/
+├── public/                # 静态资源（含 favicon/logo）
+├── src/                   # 源码
+├── dist/                  # 构建输出
+├── build.js               # 构建脚本
 └── package.json
 ```
 
-## Core Modules
+## 局限性
 
-### alphaMap.js
+- 仅移除可见水印
+- 不处理隐形/隐写水印（如 SynthID）
+- 仅保证对当前支持的水印模式有效
 
-Calculates the Alpha channel by comparing captured watermark assets:
+## 法律声明（保留）
 
-```javascript
-export function calculateAlphaMap(bgCaptureImageData) {
-    // Extract max RGB channel and normalize to [0, 1]
-    const alphaMap = new Float32Array(width * height);
-    for (let i = 0; i < alphaMap.length; i++) {
-        const maxChannel = Math.max(r, g, b);
-        alphaMap[i] = maxChannel / 255.0;
-    }
-    return alphaMap;
-}
-```
+本工具仅供个人学习与研究使用。
 
-### blendModes.js
+去除水印行为在不同司法辖区可能涉及法律风险。用户需自行确保使用行为符合适用法律、服务条款与知识产权要求，并自行承担相应责任。
 
-The mathematical core of the tool:
+作者不鼓励将本工具用于任何侵权、虚假陈述或其他非法用途。
 
-```javascript
-export function removeWatermark(imageData, alphaMap, position) {
-    // Formula: original = (watermarked - α × 255) / (1 - α)
-    for (let row = 0; row < height; row++) {
-        for (let col = 0; col < width; col++) {
-            const alpha = Math.min(alphaMap[idx], MAX_ALPHA);
-            const original = (watermarked - alpha * 255) / (1.0 - alpha);
-            imageData.data[idx] = Math.max(0, Math.min(255, original));
-        }
-    }
-}
-```
+**本软件按“原样”提供，不附带任何明示或暗示担保。对因使用本软件引发的任何索赔、损害或责任，作者不承担责任。**
 
-## Browser Compatibility
+## 致谢与版权说明（保留）
 
-- ✅ Chrome 90+
-- ✅ Firefox 88+
-- ✅ Safari 14+
-- ✅ Edge 90+
+本项目的 Reverse Alpha Blending 方法与标定水印掩码，基于 AllenK（Kwyshell）原始工作（© 2024），并遵循 MIT 许可。
 
-Required APIs:
-- ES6 Modules
-- Canvas API
-- Async/Await
-- TypedArray (Float32Array, Uint8ClampedArray)
+## License（保留）
+
+[MIT License](./LICENSE)
 
 ---
 
-## Limitations
+## English Summary
 
-- Only removes **Gemini visible watermarks** <small>(the semi-transparent logo in bottom-right)</small>
-- Does not remove invisible/steganographic watermarks. <small>[(Learn more about SynthID)](https://support.google.com/gemini/answer/16722517)</small>
-- Designed for Gemini's current watermark pattern <small>(as of 2025)</small>
+`Gemini Watermark Remover` is a browser-only tool for removing visible Gemini image watermarks.
 
-## Legal Disclaimer
+### Quick Start
 
-This tool is provided for **personal and educational use only**. 
+```bash
+pnpm install
+pnpm dev
+pnpm serve
+```
 
-The removal of watermarks may have legal implications depending on your jurisdiction and the intended use of the images. Users are solely responsible for ensuring their use of this tool complies with applicable laws, terms of service, and intellectual property rights.
+Production build:
 
-The author does not condone or encourage the misuse of this tool for copyright infringement, misrepresentation, or any other unlawful purposes.
+```bash
+pnpm build
+```
 
-**THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM THE USE OF THIS SOFTWARE.**
+Userscript output:
 
-## Credits
+- `dist/userscript/yutoai-watermark-remover.user.js`
 
-This project is a JavaScript port of the [Gemini Watermark Tool](https://github.com/allenk/GeminiWatermarkTool) by Allen Kuo ([@allenk](https://github.com/allenk)).
+### Legal Notice
 
-The Reverse Alpha Blending method and calibrated watermark masks are based on the original work © 2024 AllenK (Kwyshell), licensed under MIT License.
+Use this tool at your own risk. Watermark removal may have legal implications depending on jurisdiction and use case. You are solely responsible for compliance.
 
-## Related Links
+### License
 
-- [Gemini Watermark Tool](https://github.com/allenk/GeminiWatermarkTool)
-- [Removing Gemini AI Watermarks: A Deep Dive into Reverse Alpha Blending](https://allenkuo.medium.com/removing-gemini-ai-watermarks-a-deep-dive-into-reverse-alpha-blending-bbbd83af2a3f)
-
-## License
-
-[MIT License](./LICENSE)
+- [MIT License](./LICENSE)
