@@ -1,35 +1,33 @@
-# YutoAI 无损去水印工具（中文文档）
+[English README](./README_en.md)
+
+# Gemini 无损去水印工具（中文文档）
 
 主文档请查看 [README.md](./README.md)。
 
-## 本地运行
+## 快速开始
 
 ```bash
-pnpm install
-pnpm dev
-pnpm serve
+corepack pnpm install
+corepack pnpm dev
+npx --yes serve dist -l 28008
 ```
 
-生产构建：
+访问：`http://127.0.0.1:28008`
+
+## 生产构建
 
 ```bash
-pnpm build
+corepack pnpm build
 ```
 
-用户脚本产物：
+## 用户脚本产物
 
 - `dist/userscript/yutoai-watermark-remover.user.js`
 
-## 法律声明（保留）
+## 法律声明
 
-本工具仅供个人学习与研究使用。
+本工具仅供个人学习与研究使用。使用者需自行确保符合相关法律、平台条款与知识产权要求，并承担相应责任。
 
-去除水印行为在不同司法辖区可能涉及法律风险。用户需自行确保使用行为符合适用法律、服务条款与知识产权要求，并自行承担相应责任。
-
-作者不鼓励将本工具用于任何侵权、虚假陈述或其他非法用途。
-
-**本软件按“原样”提供，不附带任何明示或暗示担保。对因使用本软件引发的任何索赔、损害或责任，作者不承担责任。**
-
-## 许可证（保留）
+## 许可证
 
 [MIT License](./LICENSE)

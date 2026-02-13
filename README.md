@@ -1,10 +1,10 @@
-# YutoAI 无损去水印工具
+[English README](./README_en.md)
+
+# Gemini 无损去水印工具
 
 <p align="center">
-  <img src="./logo.png" width="120" alt="YutoAI Logo">
+  <img src="./logo.png" width="120" alt="Gemini Watermark Remover Logo">
 </p>
-
-中文为主，English summary 在文末。
 
 ## 项目简介
 
@@ -19,36 +19,34 @@
 - 自动识别 48×48 / 96×96 水印尺寸
 - 支持 JPG / PNG / WebP
 - 支持批量处理与打包下载
-- 支持用户脚本（Gemini 页面）
+- 支持浏览器扩展脚本（Gemini 页面）
 
 ## 本地运行与启动
 
 ### 1) 安装依赖
 
 ```bash
-pnpm install
+corepack pnpm install
 ```
 
 ### 2) 开发模式（监听构建）
 
 ```bash
-pnpm dev
+corepack pnpm dev
 ```
-
-这会持续监听源码并输出到 `dist/`。
 
 ### 3) 启动本地预览
 
 ```bash
-pnpm serve
+npx --yes serve dist -l 28008
 ```
 
-启动后访问终端输出中的本地地址（通常是 `http://localhost:3000`）。
+然后访问 `http://127.0.0.1:28008`。
 
 ### 4) 生产构建
 
 ```bash
-pnpm build
+corepack pnpm build
 ```
 
 ### 5) 用户脚本产物
@@ -72,7 +70,7 @@ yutoai-watermark-remover/
 - 不处理隐形/隐写水印（如 SynthID）
 - 仅保证对当前支持的水印模式有效
 
-## 法律声明（保留）
+## 法律声明
 
 本工具仅供个人学习与研究使用。
 
@@ -82,42 +80,10 @@ yutoai-watermark-remover/
 
 **本软件按“原样”提供，不附带任何明示或暗示担保。对因使用本软件引发的任何索赔、损害或责任，作者不承担责任。**
 
-## 致谢与版权说明（保留）
+## 致谢与版权说明
 
 本项目的 Reverse Alpha Blending 方法与标定水印掩码，基于 AllenK（Kwyshell）原始工作（© 2024），并遵循 MIT 许可。
 
-## License（保留）
+## License
 
 [MIT License](./LICENSE)
-
----
-
-## English Summary
-
-`Gemini Watermark Remover` is a browser-only tool for removing visible Gemini image watermarks.
-
-### Quick Start
-
-```bash
-pnpm install
-pnpm dev
-pnpm serve
-```
-
-Production build:
-
-```bash
-pnpm build
-```
-
-Userscript output:
-
-- `dist/userscript/yutoai-watermark-remover.user.js`
-
-### Legal Notice
-
-Use this tool at your own risk. Watermark removal may have legal implications depending on jurisdiction and use case. You are solely responsible for compliance.
-
-### License
-
-- [MIT License](./LICENSE)
