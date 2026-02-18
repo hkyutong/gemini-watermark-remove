@@ -1,7 +1,7 @@
 {
   "title": "Gemini Watermark Remover - Gemini 无损去水印工具",
   "brand.prefix": "YutoAI",
-  "brand.suffix": "免费提供",
+  "brand.suffix": "赞助",
   "header.title": "Gemini Watermark Remover",
   "nav.userscript": "安装扩展",
   "nav.principle": "去水印原理",
@@ -37,7 +37,7 @@
   "principle.modal.title": "去水印原理",
   "principle.modal.subtitle": "逆向 Alpha 混合与工程实现说明",
   "principle.modal.close": "关闭",
-  "footer.copyright": "© {{year}} YutoAI PBC",
+  "footer.copyright": "YutoAI © 2021 - 2026",
   "loading.text": "正在处理...",
   "status.loading": "正在加载资源...",
   "status.pending": "等待处理...",

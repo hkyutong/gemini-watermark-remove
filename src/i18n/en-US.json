@@ -1,7 +1,7 @@
 {
   "title": "Gemini Watermark Remover - Lossless Watermark Removal Tool",
   "brand.prefix": "YutoAI",
-  "brand.suffix": "Free Offering",
+  "brand.suffix": "Sponsored",
   "header.title": "Gemini Watermark Remover",
   "nav.userscript": "Install Extension",
   "nav.principle": "How It Works?",
@@ -37,7 +37,7 @@
   "principle.modal.title": "How Watermark Removal Works",
   "principle.modal.subtitle": "Reverse Alpha Blending and implementation details",
   "principle.modal.close": "Close",
-  "footer.copyright": "© {{year}} YutoAI PBC",
+  "footer.copyright": "YutoAI © 2021 - 2026",
   "loading.text": "Processing...",
   "status.loading": "Loading resources...",
   "status.pending": "Pending...",
